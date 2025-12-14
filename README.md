@@ -54,7 +54,7 @@ __4. 역할__
    - 데이터 증강 <br>
      - RandomHorizontalFlip : 이미지를 무작위로 수평 뒤집기 <br>
      - RandomRotation : 이미지를 200도 내외로 무작위 회전 <br>
-     - ColorJitter : 밝기, 대비, 채도, 색조 등 변경 <br>
+     - ColorJitter : 밝기, 대비, 채도, 색조 등 변경 <br> <br>
 
      <img width="700" height="400" alt="image" src="https://github.com/user-attachments/assets/704a7093-fcd4-42bb-afe4-3208d89ce366" />
 
