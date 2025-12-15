@@ -5,6 +5,7 @@
 __1. 프로젝트 개요__<br>
   - 프로젝트 목표 : 딥러닝 기술을 활용하여 렌터카 외관의 미세한 결함까지도 자동으로 식별하고 분류하는 시스템을 개발하는 것입니다.
   - 개발 배경 및 필요성 : 기존의 육안 검사 방식이 가진 근본적인 문제점을 해결하고, 고객과 업체 모두에게 효율적인 환경을 제공하는 데 중점을 두었습니다. 렌터카 반납 시, 발생하지 않은 손상에 대한 책임 공방과 부당한 수리비 청구로 인해 고객-업체 간의 신뢰가 저해되는 경우가 빈번합니다. 이러한 분쟁을 사전에 방지하고자 하였습니다. 또한, 사람이 차량 외관을 검사하는 데 필요한 시간을 획기적으로 단축하여 차량 관리 및 운영의 생산성을 극대화하는 것을 목표로 합니다.
+<br>
 
 __2. 기술 스택__<br>
    - 딥러닝 프레임워크 : PyTorch
@@ -18,28 +19,11 @@ __2. 기술 스택__<br>
 __3. 모델 개발 및 학습__<br>
    - 모델 선정 근거<br>
    빠른 추론 시간과 높은 정확도를 동시에 고려했습니다. EfficientNet B0는 MobileNet V2 대비 정확도가 높고, ResNet-50 대비 파라미터 수가 적어 최종 개발 모델로 채택되었습니다.<br>
+   <img width="680" height="300" alt="image" src="https://github.com/user-attachments/assets/7aa94e00-d2c9-4931-98a3-36a500baee4a" />
    
-     ResNet-50
-     - Inference Time : 0.0783
-     - Parameters : 25557032
-     - Top-1 Accuracy : 76.1%
-     <br>
-     
-     EfficientNet B0
-      - Inference Time : 0.0331
-      - Parameters : 5288548
-      - Top-1 Accuracy : 77.1%
-     <br>
-     
-     MobileNet V2
-      - Inference Time : 0.0267
-      - Parameters : 3504872
-      - Top-1 Accuracy : 71.8%
-
 <br>
 
-__4. 역할__
-   - 데이터셋 수집
+  - 데이터셋 수집
      모델 학습을 위해 데이터셋은 3가지 클래스로 레이블링 되었습니다.
      - Damaged (결함이 있는 차량 이미지)
      - Undamaged (결함이 없는 차량 이미지)
@@ -56,8 +40,31 @@ __4. 역할__
      - RandomRotation : 이미지를 200도 내외로 무작위 회전 <br>
      - ColorJitter : 밝기, 대비, 채도, 색조 등 변경 <br> <br>
 
-     <img width="700" height="400" alt="image" src="https://github.com/user-attachments/assets/704a7093-fcd4-42bb-afe4-3208d89ce366" />
+     <img width="700" height="300" alt="image" src="https://github.com/user-attachments/assets/704a7093-fcd4-42bb-afe4-3208d89ce366" />
 
-     
-     
-     
+<br>
+
+__4. 추론 결과__
+
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/79fb3f1a-9f1d-435f-898b-1880ba641c7a" />
+
+<br>
+<br>
+
+__5. 웹 서비스 흐름도__
+
+사용자 로그인 -> 이미지 선택 -> 분석 요청 -> AI 모델 결함 탐지 -> PDF 보고서 생성 -> 결함 유무 기반 상황별 맞춤형 조치 안내
+
+<br>
+
+__6. 기여 역할__
+
+모델의 전반적인 성능 최적화와 데이터 파이프라인 구축을 담당했습니다.
+- 데이터 수집 및 레이블링: Damaged, Undamaged, Unrelated의 3가지 클래스 정의에 따라 데이터셋을 직접 수집하고 레이블링하여 모델 학습의 기반을 마련했습니다.
+
+- 데이터 전처리 및 표준화: 모든 이미지를 (224, 224) 픽셀 크기로 통일하고 정규화(Normalize)를 적용하여 모델의 입력 형식을 표준화했습니다.
+
+- 데이터 증강: 모델의 일반화 성능을 높이기 위해 RandomHorizontalFlip, RandomRotation (200도 내외), ColorJitter의 증강 기법을 설계하고 적용했습니다.
+
+- 성능 최적화: 이러한 학습 전략을 통해 최종 3-Class 모델은 초기 모델 대비 정확도 3.61% 개선, F1 Score 3.67% 개선, Loss 66.51% 감소라는 정량적 성과를 달성하는 데 기여했습니다.
+   
