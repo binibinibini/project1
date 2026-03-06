@@ -8,7 +8,6 @@ __1. 프로젝트 개요__<br>
 <br>
 
 __2. 기술 스택__<br>
-   - 딥러닝 프레임워크 : PyTorch
    - 백엔드/서버 : Python, Flask
    - 프론트엔드 : JavaScript(JS)
    - 데이터베이스 : SQLite3
